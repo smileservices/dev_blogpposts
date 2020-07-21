@@ -21,16 +21,91 @@ REST_FRAMEWORK = {
 }
 
 ```
-## serializers
 
+## models
+```
+from django.db import models
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=256)
+    description = models.TextField()
+    status = models.BooleanField()
+
+
+class NutritionalInformation(models.Model):
+    class Unit(models.TextChoices):
+        PIECE = 'pc', 'Piece'
+        KG = 'kg', 'Kilogram'
+
+    name = models.CharField(max_length=256)
+    unit = models.CharField(
+        max_length=2,
+        choices=Unit.choices,
+        default=Unit.PIECE
+    )
+    value = models.IntegerField()
+    product = models.ForeignKey(Product, related_name='nutritional_value', on_delete=models.CASCADE)
+
+```
+## serializers
+```
+from rest_framework import serializers
+from food.models import Product, NutritionalInformation
+
+
+class NutritionalValuesSerializer(serializers.ModelSerializer):
+    queryset = Product.objects.all()
+
+    class Meta:
+        model = NutritionalInformation
+        fields = ['name', 'unit', 'value']
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    queryset = Product.objects.all()
+    nutritional_values = NutritionalValuesSerializer(many=True)
+
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'status', 'nutritional_values']
+```
+
+## views
+
+```
+# admin views
+class ProductViewset(ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [IsAdminUser]
+
+
+class NutritionalValueViewset(ModelViewSet):
+    queryset = NutritionalInformation.objects.all()
+    serializer_class = NutritionalValuesSerializer
+    permission_classes = [IsAdminUser]
+
+
+# frontend views
+class ProductReadOnlyViewset(ReadOnlyModelViewSet):
+    queryset = Product.objects.filter(status=True).all()
+    serializer_class = ProductSerializer
+
+```
 
 ## urls
 ```
 from rest_framework import routers
-from jobhound.views import JobViewSet
 
 router = routers.DefaultRouter()
-router.register('jobs', JobViewSet, basename='jobs')
+router.register('food', food_views.ProductReadOnlyViewset, basename='frontend_list_food')
+
+urlpatterns = [
+    path('', views.homepage, name='homepage'),
+]
+
+urlpatterns += router.urls
 ```
 
 ### PrimaryRelatedField

@@ -30,6 +30,17 @@ root:x:0:0:root:/root:/bin/bash
 get current user with "whoami"
 change user with "su"
 
+# Scripting
+
+make script to run as anoher user
+```
+su - {username} <<-'EOF'
+	{command 1}
+	{command 2}
+EOF
+# the lines after the EOF will be executed again as the initial user
+```
+
 ### Adding users
 
 If an user is created without setting a primary group, then a group with its name is created and assigned to it
@@ -37,26 +48,25 @@ If an user is created without setting a primary group, then a group with its nam
 ```
 adduser --home {home address} -c {comment} {user name}
 ```
+or single command https://www.computerhope.com/unix/useradd.htm```
+useradd -d {home dir path} -p {encrypted} -m {username}"
 
 arguments to use:
-
 -c Adds a comment. -c “John from Accounts”
-
 -d Specifies home directory for the user. Use this if the name of the home directory is different from the username. -d /home/accounts/john
-
 -e Specifies the expiration date for the account in YYYY-MM-DD format. -e 2017-01-01
-
 -g Specifies the primary group of the user. The group must already exist in the /etc/group file. -g accounts
-
 -G Specifies the additional groups to which the user belongs. -G employees
-
 -k Specifies the skeleton directory. The contents from the skeleton directory are copied into the user’s home directory. This flag can only be used in conjunction with the -m flag. The default skeleton directory is /etc/skel. -k /skelton/accounts
-
 -p Specifies the password to be associated with this account. This must be an encrypted password. You can assign the password later using passwd command. -p hashed_password
-
 -s Specifies the shell to be associated with this account. -s /bin/bash
-
 -u Specifies the user ID to be used with this account. Without -u flag, the first available user ID will be assigned. -u 1005
+
+### Get info of user
+Read /etc/passwd and /etc/group
+```
+id {user}
+```
 
 
 ### Modifying users
@@ -133,9 +143,7 @@ chgrp {newgroup}
 ```
 ssh-keygen
 ```
-
 How to change ssh config
-
 Use a Match block at the end of /etc/ssh/sshd_config:
 
 
@@ -160,7 +168,6 @@ ps -ef | grep nginx
 ```
 
 
-
 ## ufw (firewall)
 sudo ufw status verbose
 sudo ufw enable
@@ -182,8 +189,9 @@ sudo netstat -tulpn
 - create .tmux.conf:
 sudo tmux show -g | cat > /etc/.tmux.conf
 - add this:
+```
 set -as terminal-overrides ',*:indn@'
-
+```
 
 ## access address or port (curl, wget)
 curl {address}
@@ -207,16 +215,15 @@ df -h
 (explanation for soft/hard links)[https://stackoverflow.com/a/185903/1957846]
 
 - create
-
 ```
 ln -s file1 link1
 ```
 
 - verify
-
 ```
 ls -l file1 link1
 ```
+IMPORTANT: provide full path to file and links not relative to cwd
 
 # System check
 
@@ -225,3 +232,16 @@ ls -l file1 link1
 free -m
 vmstat -s
 htop
+
+# snaps
+https://www.freecodecamp.org/news/managing-ubuntu-snaps/
+
+list all snap services
+```
+snap services
+```
+
+stop service
+```
+sudo snap stop -disable {servicename}
+```

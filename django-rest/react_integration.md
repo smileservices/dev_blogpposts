@@ -1,5 +1,7 @@
 # Integration of REACT with django-rest
 
+## Single Page Application Mode
+
 - article:
 	https://www.valentinog.com/blog/drf/#Django_REST_with_React_Django_and_React_together
 
@@ -148,3 +150,33 @@ Run build script with dev or prod
 npm run dev
 ```
 	
+## Nano Mode
+``` frontend interfaces to be like a teenage gymnast: lightweight and flexible ```
+The purpouse of this approach is to minimize both the js bundle sizes and the number of requests. There will be onl 2 .js files neccessary: 
+	1. common js package (containing libraries used all around the website)
+	2. website url specific app
+This is for when you want to have mini-SPAs like dashboard/account/settings/ or /dashboard/orders/
+It is basically server-serving self-containing javascript lightweight apps managing resources through REST endpoints
+
+1. Change webpack.config
+this makes webpack to ignore the said packages and route them to the values
+https://webpack.js.org/configuration/externals/
+```
+externals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM',
+    },
+```
+2. Pack react and react-dom in webpack.config
+```
+entry: {
+	'''
+	'static/js/react-bundle': ['./app/static/js/react.min.js', './app/static/js/react-dom.min.js'],
+	'''
+}
+```
+3. Add script to html file
+
+
+
+https://www.debugbear.com/blog/bundle-splitting-components-with-webpack-and-react

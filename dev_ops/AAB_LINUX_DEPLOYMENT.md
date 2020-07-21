@@ -1,4 +1,11 @@
 # Workplan
+systemwide
+1. install nginx, python, virtualenv, certbot, postgresql etc
+2. make user named as app and clone the app repo in the home folder of the user. make virtualenv
+3. run the scripts for the app - install requirements, collectstatic, etc
+4. make gunicorn_start file in the user dir
+5. make nginx config file
+6. add gunicorn service to systemd or supervisor
 
 # Initial setup
 - create user with sudo rights
