@@ -1,3 +1,10 @@
+Title: Deploying Django App
+Category: Django
+Tags: linux, django, unix, deployment
+Slug: deploying-django
+Date: 2018-06-03 10:20
+Modified: 2020-07-05 19:30
+
 # Workplan
 systemwide
 1. install nginx, python, virtualenv, certbot, postgresql etc
@@ -8,8 +15,8 @@ systemwide
 6. add gunicorn service to systemd or supervisor
 
 # Initial setup
-- create user with sudo rights
-```
+create user with sudo rights
+```shell
 adduser {name}
 paswd {name}
 usermod -aG sudo {name}
@@ -20,6 +27,7 @@ su {name}
 - create user for each app
 
 # Install python,django,virtualenv,nginx,gunicorn
+```shell
 sudo apt-get update
 sudo apt-get -y upgrade
 sudo apt install certbot
@@ -32,6 +40,7 @@ sudo systemctl enable supervisor
 sudo systemctl start supervisor
 sudo apt-get -y install python3-virtualenv
 sudo apt-get -y install python3-pip
+```
 
 ! Install optional Redis, Elasticsearch (if using haystack, install elasticsearch 1.75)
 
@@ -39,23 +48,23 @@ sudo apt-get -y install python3-pip
 - create new user for each app
 adduser {user}
 - create (virtual env)[https://docs.python.org/3/library/venv.html] in ~/www/{project_name}
-```
+```shell
 python3 -m venv {project_name}
 ```
 - activate the venv 
-```
+```shell
 source ~/www/{project_name}
 ```
 - clone repo in ~/www/{project_name}/repo
 - install requirements
-```
+```shell
 pip install -r repo/requirements.txt
-
 ```
+
 - create .env file (if project requires it)
 - collectstatic and create superuser
 
-```
+```shell
 python manage.py collectstatic
 python manage.py makemigrations
 python manage.py migrate
@@ -63,20 +72,23 @@ python manage.py createsuperuser
 ```
 
 # Set up postgresql
+```shell
 sudo apt-get -y install build-essential libpq-dev python-dev
 sudo apt-get -y install postgresql postgresql-contrib
 su - postgres
 createuser {db_username}
 createdb {db_name} --owner {db_username}
 psql -c "ALTER USER {db_username} WITH PASSWORD '{password}'"
+```
+
 
 # Set up nginx and gunicorn
 
 ## set up gunicorn
+create gunicorn_start file in {app root}/bin/
 
-- create gunicorn_start file in {app root}/bin/
-
-```
+```shell
+# gunicorn_start file
 #!/bin/bash
 
 NAME="memeashirt.smile-services.ro"
@@ -107,19 +119,17 @@ exec ../bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
 
 - Make it executable
 
-```
+```shell
 chmod u+x bin/gunicorn_start
 ```
-
 - create empty directory 'run' where gunicorn.sock will be created
 - create directory 'logs' with empty file gunicorn-error.log
 
-
-
-### add gunicorn to supervisor
+### add gunicorn to supervisor or systemd
+This step is required for making sure django app is run even if it stops
 - set up supervisor /etc/supervisor/conf.d/{name}.conf
 
-```
+```shell
 [program:{name}]
 command=/home/{user}/www/{dir}/bin/gunicorn_start
 user={user}
@@ -131,7 +141,7 @@ stdout_logfile=/home/{user}/www/memeashirt/logs/gunicorn-error.log
 
 - add the new task to supervisor
 
-```
+```shell
 sudo supervisorctl reread
 sudo supervisorctl update
 ```
@@ -139,7 +149,7 @@ sudo supervisorctl update
 ## set up nginx
 - create vhost file in /etc/nginx/sites-available/{name}
 
-```
+```shell
 upstream app_memeashirt_test {                                                                    
     server unix:/home/smileservices/www/memeashirt.smile-services.ro/run/gunicorn.sock fail_timeout=0;
 }                                                                                                 
@@ -175,18 +185,19 @@ server {
     }                                                                                             
 }                                                                                                 
 ```
+
 Make a soft symlink to enable the virtual block 
-```
+```shell
 ln -s /etc/ngnix/sites-available/{name} /etc/nginx/sites-enabled/{name}
 ```
 
 Check the nginx configuration and restart it
-```
+```shell
 sudo nginx -t
 sudo service nginx restart
 ```
 
 # Set up ssl
-```
+```shell
 sudo certbot --nginx -d {domain name} 
 ```

@@ -1,6 +1,6 @@
-# How to 
+# How to operate Celery
 
-## Lista de lectura
+## Read
 https://www.fullstackpython.com/celery.html
 
 ## Big tasks working in background

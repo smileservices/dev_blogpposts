@@ -1,13 +1,18 @@
-# Important unix commands
+Title: Important unix commands
+Slug: important-linux-commands
+Tags: linux, unix, cheatsheet
+Category: Linux
+Date: 2019-12-03 10:20
+Modified: 2020-07-05 19:30
+
 
 ## Permissions
 These are the "rights" that an user has on certain files or folders. They are read,write and execute. To folders, execute means opening it. Only the file owner and root can modify the permissions.
 HOWEVER - a file can be replaced by its copy and thus gain access to setting permissions on it
 
-```
+```shell
 chmod 777 -R {folder}
 ```
-
 
 ### What is the sudo command?
 The root user is enabled to do anything on the system. This makes it very powerful to use everytime, so instead we use users with limited permissions. For a regular user to access the restricted permissions it must use "sudo" in front of the command. It will prompt for the user password afterwards.
@@ -17,12 +22,12 @@ To add more users to the sudo privileges you must use the "visudo" command to ed
 ## How to set up users and groups
 
 ### What are users
-[linuxacademy](https://linuxacademy.com/howtoguides/posts/show/topic/12659-understanding-linux-users-and-groups)
-Linux is a multiuser operating system. There are human users - that log into the system - and system users - used for non-interactive actions. Linux treats them the same, only the ID range of them is different. Users can be in multiple groups at once.
 
-The information about users is stored in /etc/passwd file
+Linux is a multiuser operating system. There are human users - that log into the system - and system users - used for non-interactive actions. Linux treats them the same, only the ID range of them is different. Users can be in multiple groups at once. The information about users is stored in /etc/passwd file
 
-```
+Read about linux users on  [linuxacademy](https://linuxacademy.com/howtoguides/posts/show/topic/12659-understanding-linux-users-and-groups)
+
+```shell
 root@ubuntu:~$ head -1 /etc/passwd
 root:x:0:0:root:/root:/bin/bash
 ```
@@ -33,7 +38,7 @@ change user with "su"
 # Scripting
 
 make script to run as anoher user
-```
+```shell
 su - {username} <<-'EOF'
 	{command 1}
 	{command 2}
@@ -45,7 +50,7 @@ EOF
 
 If an user is created without setting a primary group, then a group with its name is created and assigned to it
 
-```
+```shell
 adduser --home {home address} -c {comment} {user name}
 ```
 or single command https://www.computerhope.com/unix/useradd.htm```
@@ -64,7 +69,7 @@ arguments to use:
 
 ### Get info of user
 Read /etc/passwd and /etc/group
-```
+```shell
 id {user}
 ```
 
@@ -72,34 +77,34 @@ id {user}
 ### Modifying users
 
 Set password
-```
+```shell
 sudo passwd {user}
 ```
 
 Change the home directory (d flag) and copy the old content (m flag)
-```
+```shell
 sudo usermod -m -d {new home dir} {user}
 ```
 
 Change user's group
 
 Change the main group
-```
+```shell
 sudo usermod -g {new group} {user}
 ```
 
 Add additional groups
-```
+```shell
 sudo usermod -aG {group} {user}
 ```
 
 Replace all additional groups
-```
+```shell
 sudo usermod -G {group} {user}
 ```
 
 Remove user from group
-```
+```shell
 sudo deluser {user} {group}
 ```
 
@@ -107,7 +112,7 @@ sudo deluser {user} {group}
 This not only deletes the user but also removes all the files that belong to the user including those that are outside the home directory.
 
 to remove user and its files/home folder add -r flag
-```
+```shell
 sudo userdel -r {user}
 ```
 
@@ -115,60 +120,60 @@ sudo userdel -r {user}
 Groups organize users permissions. When a file/folder is created it belongs by default to the user's primary group. Users that share the same group have the permissions set by the file/folder group permissions. 
 
 create new group
-```
+```shell
 groupadd {groupname}
 ```
 
 ### How to change a folder owner and group
-```
+```shell
 chown {user}:{group} {target}
 ```
 to use recursivly apply the -R flag
 
 ### How to see user's groups
-```
+```shell
 groups {user}
 ```
 
 ### Change primary group
-```
+```shell
 chgrp {newgroup}
 ```
 
 
-# SSH
+## SSH
 
-## Add ssh keys - (attlassian link)[https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html#SetupanSSHkey-ssh2]
+Read attlassian article about ssh keys - [attlassian link](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html#SetupanSSHkey-ssh2)
 
-```
+Generate ssh private/public keys:
+```shell
 ssh-keygen
 ```
-How to change ssh config
-Use a Match block at the end of /etc/ssh/sshd_config:
 
-
-## Global settings
-```
+#### Configuring ssh settings
+SSH settings are found at /etc/ssh/sshd_config:
+```shell
 PasswordAuthentication no
 ```
 
-## Settings that override the global settings for matching IP addresses only
-```
+Settings that override the global settings for matching IP addresses only
+```shell
 Match address 192.0.2.0/24
-    PasswordAuthentication yes
+PasswordAuthentication yes
 ```
-Then tell the sshd service to reload its configuration:
-```
+
+Tell the sshd service to reload its configuration:
+```shell
 service ssh reload
 ```
 
-Show processes and their owners
-```
+## Show processes and their owners
+```shell
 ps -ef | grep nginx
 ```
 
-
 ## ufw (firewall)
+```shell
 sudo ufw status verbose
 sudo ufw enable
 sudo ufw allow http
@@ -179,69 +184,78 @@ sudo ufw default allow outgoing
 sudo ufw allow ssh
 sudo ufw allow 22
 sudo ufw allow from 15.15.15.51
-
+```
 ## ports
 see all ports
+```shell
 sudo netstat -tulpn
-
-##tmux
-- fix garbled screen
-- create .tmux.conf:
-sudo tmux show -g | cat > /etc/.tmux.conf
-- add this:
 ```
+
+## tmux
+A terminal multiplexer (simulates multiple terminals inside one)
+#### fix garbled screen
+- create .tmux.conf:
+```shell
+sudo tmux show -g | cat > /etc/.tmux.conf
+```
+- add this:
+```shell
 set -as terminal-overrides ',*:indn@'
 ```
 
 ## access address or port (curl, wget)
-curl {address}
-
+```shell
+curl {address}:{port}
+```
 
 # Fylesystem
 
 ## Empty file without removing
+```shell
 truncate -s 0 filename
 > file.txt
+```
 
 ## disk space
-```
+```shell
 df -h
 ```
 
 ## symlink
 
-(what is a symbolic link)[https://www.cyberciti.biz/faq/creating-soft-link-or-symbolic-link/]
+Read article about [what is a symbolic link](https://www.cyberciti.biz/faq/creating-soft-link-or-symbolic-link/)
 
-(explanation for soft/hard links)[https://stackoverflow.com/a/185903/1957846]
+Read Read article [explaining soft/hard links](https://stackoverflow.com/a/185903/1957846)
 
-- create
-```
+create soft link
+```shell
 ln -s file1 link1
 ```
 
-- verify
-```
+verify
+```shell
 ls -l file1 link1
 ```
 IMPORTANT: provide full path to file and links not relative to cwd
 
 # System check
 
-- available memory
-
+available memory
+```shell
 free -m
 vmstat -s
 htop
+```
 
 # snaps
-https://www.freecodecamp.org/news/managing-ubuntu-snaps/
+Article about managing [ubuntu snaps](https://www.freecodecamp.org/news/managing-ubuntu-snaps/)
 
 list all snap services
-```
+```shell
 snap services
 ```
 
 stop service
-```
+```shell
 sudo snap stop -disable {servicename}
 ```
