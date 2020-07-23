@@ -2,6 +2,7 @@ Title: Deploying Django App
 Category: Django
 Tags: linux, django, unix, deployment
 Slug: deploying-django
+<<<<<<< HEAD
 Summary: How to set up a Django app deployment on an Ubuntu server: initial configuration of the server and then setting up the app
 Date: 2018-06-03 10:20
 Modified: 2020-07-05 19:30
@@ -17,6 +18,21 @@ Modified: 2020-07-05 19:30
 8. Add gunicorn service to systemd or supervisor
 
 ## Initial setup
+=======
+Date: 2018-06-03 10:20
+Modified: 2020-07-05 19:30
+
+# Workplan
+systemwide
+1. install nginx, python, virtualenv, certbot, postgresql etc
+2. make user named as app and clone the app repo in the home folder of the user. make virtualenv
+3. run the scripts for the app - install requirements, collectstatic, etc
+4. make gunicorn_start file in the user dir
+5. make nginx config file
+6. add gunicorn service to systemd or supervisor
+
+# Initial setup
+>>>>>>> 4b219373f907a753a0a25bc8a02da92a9e45ea68
 create user with sudo rights
 ```shell
 adduser {name}
@@ -28,7 +44,11 @@ su {name}
 - remove password and root login
 - create user for each app
 
+<<<<<<< HEAD
 ## Install python,django,virtualenv,nginx,gunicorn
+=======
+# Install python,django,virtualenv,nginx,gunicorn
+>>>>>>> 4b219373f907a753a0a25bc8a02da92a9e45ea68
 ```shell
 sudo apt-get update
 sudo apt-get -y upgrade
@@ -43,7 +63,10 @@ sudo systemctl start supervisor
 sudo apt-get -y install python3-virtualenv
 sudo apt-get -y install python3-pip
 ```
+<<<<<<< HEAD
 Install optional Redis, Elasticsearch
+=======
+>>>>>>> 4b219373f907a753a0a25bc8a02da92a9e45ea68
 
 ## Set up django project
 - create new user for each app
@@ -72,7 +95,11 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
+<<<<<<< HEAD
 ## Set up postgresql
+=======
+# Set up postgresql
+>>>>>>> 4b219373f907a753a0a25bc8a02da92a9e45ea68
 ```shell
 sudo apt-get -y install build-essential libpq-dev python-dev
 sudo apt-get -y install postgresql postgresql-contrib
@@ -81,11 +108,21 @@ createuser {db_username}
 createdb {db_name} --owner {db_username}
 psql -c "ALTER USER {db_username} WITH PASSWORD '{password}'"
 ```
+<<<<<<< HEAD
 
 
 ## Set up gunicorn
 create gunicorn_start file in {app root}/bin/
 
+=======
+
+
+# Set up nginx and gunicorn
+
+## set up gunicorn
+create gunicorn_start file in {app root}/bin/
+
+>>>>>>> 4b219373f907a753a0a25bc8a02da92a9e45ea68
 ```shell
 # gunicorn_start file
 #!/bin/bash
@@ -124,7 +161,11 @@ chmod u+x bin/gunicorn_start
 - create empty directory 'run' where gunicorn.sock will be created
 - create directory 'logs' with empty file gunicorn-error.log
 
+<<<<<<< HEAD
 ### Add gunicorn to supervisor or systemd
+=======
+### add gunicorn to supervisor or systemd
+>>>>>>> 4b219373f907a753a0a25bc8a02da92a9e45ea68
 This step is required for making sure django app is run even if it stops
 - set up supervisor /etc/supervisor/conf.d/{name}.conf
 
