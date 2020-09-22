@@ -1,7 +1,16 @@
+Title: Handling Images with Django and nginx in production
+Category: Django
+Tags: django, images, production-ready, versatileimagefield, thumbnails
+Slug: django-handling-images-in-production
+Summary: How to handle images in production with django and nginx is not difficult but the documentation on this subject is lacking. This is an article meant to address this issue by providing clear instructions and working examples on how to set up a production ready image handling with django and versatileimagefield. We cover which library is best to use for handling images and how to use it for creating thumbnails and serve them.
+Date: 2020-09-22 10:00
+Modified: 2020-09-22 19:30
+
 # Handling Models with images or galleries
 
-## Why is this always an issue?
-Everytime I have to implement adding images to a project I feel a "oh boy, here we go again" type of feeling. I've done it multiple times but each time I have to go through the process of searching through the django packages for something that can fulfill my requirements and then fiddling with storage/triggers for delete and templates. Why is this not a simple process?
+Everytime I have to implement adding images to a project I feel a "oh boy, here we go again" type of feeling. I've done it multiple times but each time I have to go through the process of searching through the django packages for something that can fulfill my requirements and then fiddling with storage/triggers for delete and templates. While the process is simple, the docs don't have fully working production grade examples. This is what this article is trying to do.
+
+This is an article meant to address this issue by providing clear instructions and working examples on how to set up a production ready image handling with django and versatileimagefield. We cover which library is best to use for handling images and how to use it for creating thumbnails and serve them. We also set up a production ready working example along with nginx configuration.
 
 ## Libraries:
 - sorl-thumbnail.readthedocs.io
@@ -12,18 +21,19 @@ Everytime I have to implement adding images to a project I feel a "oh boy, here 
 ## Requirements
 1. Validate image
 2. Save Image to storage
-3. Create optimized thumbnails
+3. Create optimized thumbnails on saving an image
 4. If delete parent model, have to delete the files also
 
 
 # Versatile Image Field
+I think this is the best image handling library to work with Django as it has the most features and is widely used in big projects like Saleor.
 
 Pros: 
 - widely used
 - easy to set up
 
 Cons:
-- need to use the post_delete signal to clear the files:
+- need to use the post_delete signal to clear the files and post_save to create the thumbnails:
     ```python
     # someapp/models.py
     from django.db import models
@@ -103,8 +113,9 @@ class StudyResourceImage(models.Model):
 ```
 
 ## Example implementation of VersatileImageField for production
-- need to create thumbs each time we save/update the image
-- need to use VERSATILEIMAGEFIELD_RENDITION_KEY_SETS for specifying how we create the thumbnails
+- delete all produced images sets with post_delete signal
+- create thumbs each time we save/update the image
+- use VERSATILEIMAGEFIELD_RENDITION_KEY_SETS for specifying how we create the thumbnails
 
 
 ```python
