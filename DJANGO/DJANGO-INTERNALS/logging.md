@@ -1,9 +1,9 @@
-Title: Important Unix Commands
-Slug: important-linux-commands
-Tags: linux, unix, cheatsheet
-Category: Linux
+Title: Django Logging
+Slug: django-logging
+Tags: django, logging
+Category: Django
 Summary: Setting up logging is crucial to monitoring any app. This way you know what works and what doesn't. If done correctly it will save a lot of time of debugging.  
-Date: 2018-02-03 10:20
+Date: 2019-04-03 10:20
 Modified: 2020-07-05 19:30
 
 ## Resources for reading
