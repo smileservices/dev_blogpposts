@@ -1,12 +1,12 @@
 # Set up
 
 ## install
-```
+```bash
 pip install djangorestframework
 ```
 
 settings.py
-```
+```python
 INSTALLED_APPS = (
     ...
     'rest_framework',
@@ -23,7 +23,7 @@ REST_FRAMEWORK = {
 ```
 
 ## models
-```
+```python
 from django.db import models
 
 
@@ -49,7 +49,7 @@ class NutritionalInformation(models.Model):
 
 ```
 ## serializers
-```
+```python
 from rest_framework import serializers
 from food.models import Product, NutritionalInformation
 
@@ -73,7 +73,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 ## views
 
-```
+```python
 # admin views
 class ProductViewset(ModelViewSet):
     queryset = Product.objects.all()
@@ -95,7 +95,7 @@ class ProductReadOnlyViewset(ReadOnlyModelViewSet):
 ```
 
 ## urls
-```
+```python
 from rest_framework import routers
 
 router = routers.DefaultRouter()
@@ -111,7 +111,7 @@ urlpatterns += router.urls
 ### PrimaryRelatedField
 
 - related_name argument on related model ForeignKey should match both "field name" of the serializer and also be inside fields tuple
-```
+```python
 owner = models.ForeignKey('auth.User', related_name='snippets')
 
 class UserSerializer(serializers.ModelSerializer):

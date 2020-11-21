@@ -1,43 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.3">
-  <zoom_level>10</zoom_level>
+  <zoom_level>4</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
-      <y>260</y>
-      <w>670</w>
-      <h>220</h>
+      <x>756</x>
+      <y>68</y>
+      <w>268</w>
+      <h>156</h>
     </coordinates>
     <panel_attributes>Editable Component({endpoint, data, FormViewClass, DisplayViewClass})
 --
 - endpoint
 - data
-- FormViewClass
-- DisplayViewClass
+- FormViewComponent
+- DisplayViewComponent
+- updateCallback
+- deleteCallback
+- customUpdateFunction=false
+
 --
 internal state:
 - showForm
-- elementData
+- confirmDelete
+- waiting
+- responseAlertUpdate
+- responseAlertDisplay
+- formErrors
 
 internal functions:
-- delete
-- update(data)</panel_attributes>
+- deleteElement
+- updateElement(updatedData)
+- toggleShowForm
+- displayFormModal</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
-      <y>680</y>
-      <w>320</w>
-      <h>170</h>
+      <x>744</x>
+      <y>304</y>
+      <w>140</w>
+      <h>92</h>
     </coordinates>
-    <panel_attributes>/FormViewClass({data, update, cancel})
+    <panel_attributes>/FormViewComponent({data, update, cancel})
 --
 data
-update
-cancel
+updateElement
+waiting
+responseAlert
+formErrors
+
 --
 internal:
 - formData
@@ -49,12 +62,12 @@ internal functions:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>670</x>
-      <y>680</y>
-      <w>320</w>
-      <h>170</h>
+      <x>896</x>
+      <y>304</y>
+      <w>128</w>
+      <h>68</h>
     </coordinates>
-    <panel_attributes>/DisplayViewClass({data, edit, delete})/
+    <panel_attributes>/DisplayViewComponent({data, waiting})/
 --
 data
 edit
@@ -65,10 +78,10 @@ delete
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>620</x>
-      <y>560</y>
-      <w>40</w>
-      <h>40</h>
+      <x>876</x>
+      <y>256</y>
+      <w>16</w>
+      <h>16</h>
     </coordinates>
     <panel_attributes>type=decision</panel_attributes>
     <additional_attributes/>
@@ -76,10 +89,10 @@ delete
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>570</y>
-      <w>240</w>
-      <h>130</h>
+      <x>788</x>
+      <y>260</y>
+      <w>96</w>
+      <h>52</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 true</panel_attributes>
@@ -88,10 +101,10 @@ true</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>570</y>
-      <w>280</w>
-      <h>130</h>
+      <x>888</x>
+      <y>260</y>
+      <w>112</w>
+      <h>52</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 false</panel_attributes>
@@ -100,13 +113,512 @@ false</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>470</y>
-      <w>100</w>
-      <h>110</h>
+      <x>880</x>
+      <y>228</y>
+      <w>40</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-show form</panel_attributes>
-    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+showForm</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>1148</x>
+      <y>0</y>
+      <w>384</w>
+      <h>420</h>
+    </coordinates>
+    <panel_attributes>Resource Specific Components
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1164</x>
+      <y>84</y>
+      <w>128</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>CreateApp
+--
+internal state
+--
+waiting
+alert
+errors
+...specific (tags, options, etc)
+
+methods
+--
+validate
+create</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>960</x>
+      <y>468</y>
+      <w>424</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>Reusable Components
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>1092</x>
+      <y>528</y>
+      <w>128</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>renders the form with children and alert, waiting, submit action
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>444</x>
+      <y>0</y>
+      <w>640</w>
+      <h>420</h>
+    </coordinates>
+    <panel_attributes>Resource CRUD while listing
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>732</x>
+      <y>16</y>
+      <w>332</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>CRUD operations invokable in overlay fashion
+
+ex:
+- while listing products, allow to update by overlaying a modal
+- while viewing a resource, open create window for a child resource
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>464</x>
+      <y>68</y>
+      <w>268</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>Creatable Component({endpoint, FormViewClass, DisplayViewClass})
+--
+- endpoint
+- data
+- FormViewComponent
+- DisplayViewComponent
+- create callback
+- customUpdateFunction=false
+
+--
+internal state:
+- showForm
+- waiting
+- alertForm
+- alertDisplay
+- formErrors
+
+internal functions:
+- create element
+- toggleShowForm
+- displayFormModal</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1160</x>
+      <y>236</y>
+      <w>212</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Resource Form (shared for create/update)
+--
+internal state
+--
+formData</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1268</x>
+      <y>164</y>
+      <w>88</w>
+      <h>344</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+callback (if validate, create)</panel_attributes>
+    <additional_attributes>10.0;840.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1248</x>
+      <y>164</y>
+      <w>24</w>
+      <h>344</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+alert</panel_attributes>
+    <additional_attributes>10.0;840.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1196</x>
+      <y>164</y>
+      <w>32</w>
+      <h>344</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+waiting</panel_attributes>
+    <additional_attributes>10.0;840.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1224</x>
+      <y>164</y>
+      <w>28</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+errors</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>1172</x>
+      <y>68</y>
+      <w>128</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>manages the creation process at highest level
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1016</x>
+      <y>500</y>
+      <w>304</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>FormElement
+--
+internal state
+--
+-</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1164</x>
+      <y>292</y>
+      <w>36</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+formData</panel_attributes>
+    <additional_attributes>10.0;520.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>1236</x>
+      <y>260</y>
+      <w>128</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>build and presents the form children
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>768</x>
+      <y>392</y>
+      <w>256</w>
+      <h>124</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+waiting</panel_attributes>
+    <additional_attributes>620.0;290.0;10.0;290.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>392</y>
+      <w>264</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+alert</panel_attributes>
+    <additional_attributes>640.0;360.0;10.0;360.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>764</x>
+      <y>392</y>
+      <w>260</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+callback</panel_attributes>
+    <additional_attributes>630.0;320.0;10.0;320.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>752</x>
+      <y>904</y>
+      <w>64</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>create resource</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>884</x>
+      <y>904</y>
+      <w>112</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>CreateableFormComponent</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>824</x>
+      <y>892</y>
+      <w>48</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>use modal</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>824</x>
+      <y>916</y>
+      <w>48</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>separate page</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>752</x>
+      <y>996</y>
+      <w>64</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>edit resource on page</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>828</x>
+      <y>996</y>
+      <w>44</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>use modal</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>888</x>
+      <y>1012</y>
+      <w>112</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>EditableFormComponent</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>752</x>
+      <y>1028</y>
+      <w>64</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>edit resource in list</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>828</x>
+      <y>1028</y>
+      <w>44</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>use modal</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>884</x>
+      <y>924</y>
+      <w>116</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>can create and display waiting/errors. uses custom resource form
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>884</x>
+      <y>1032</y>
+      <w>116</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>can edit, delete and display waiting/errors. uses custom resource form and display component
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>1016</x>
+      <y>904</y>
+      <w>140</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>redirect to resource detail page
+type=receiver</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>1016</x>
+      <y>1012</y>
+      <w>140</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>update resource data onpage
+type=receiver</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>88</x>
+      <y>272</y>
+      <w>76</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>EditableFormComponent
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>136</x>
+      <y>324</y>
+      <w>96</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ResourceForm
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>144</x>
+      <y>336</y>
+      <w>80</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>FormLayout
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>204</x>
+      <y>272</y>
+      <w>80</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>CreatableFormComponent
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>68</x>
+      <y>444</y>
+      <w>236</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>ModalFormComponent
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>52</x>
+      <y>416</y>
+      <w>76</w>
+      <h>68</h>
+    </coordinates>
+    <panel_attributes>EditableComponent
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>260</x>
+      <y>416</y>
+      <w>72</w>
+      <h>68</h>
+    </coordinates>
+    <panel_attributes>CreateableComponent
+valign=top</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

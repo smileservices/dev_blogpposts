@@ -87,6 +87,18 @@ psql
 CREATE EXTENSION IF NOT EXISTS "";
 ```
 
+## Enable Full Text Search
+
+This results in the following SQL:
+!note: run this connected to the specific database
+```sql
+BEGIN;
+CREATE EXTENSION IF NOT EXISTS "pg_trgm";
+CREATE EXTENSION IF NOT EXISTS "unaccent";
+COMMIT;
+```
+need to run this command as db super admin or have create privileges
+
 ## Debug
 
 - start

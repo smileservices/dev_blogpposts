@@ -1,6 +1,9 @@
 # Docker Cheatsheet
 https://docker-curriculum.com/
 
+## start docker
+
+
 ## images, containers
 - show all containers, images
 ```
@@ -13,6 +16,10 @@ docker images
 docker build -t {image name} {path to Dockerfile}
 ```
 
+- run command for container
+```bash
+
+```
 
 ## network
 - list all docker networks, inspect one

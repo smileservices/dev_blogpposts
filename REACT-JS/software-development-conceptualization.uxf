@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>368</x>
+      <y>1688</y>
+      <w>248</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Technologies
+--
+kubernetes, docker, ansible
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>368</x>
+      <y>1744</y>
+      <w>248</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Tags
+--
+devops, deployment, horizontal scaling
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>0</x>
+      <y>1432</y>
+      <w>440</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Problem
+--
+summary: maintaining sofware on multiple servers
+main-branch: web software
+problem-class: manageability of complexity
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>80</x>
+      <y>1688</y>
+      <w>272</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Solution
+--
+automating deployment and maintaiment
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>248</x>
+      <y>1888</y>
+      <w>248</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Problem
+--
+some problem ...
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>96</x>
+      <y>1552</y>
+      <w>24</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>248</x>
+      <y>1960</y>
+      <w>248</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Problem
+--
+
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>136</x>
+      <y>1816</y>
+      <w>112</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>120.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>128</x>
+      <y>1904</y>
+      <w>112</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>120.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>688</x>
+      <y>1616</y>
+      <w>272</w>
+      <h>312</h>
+    </coordinates>
+    <panel_attributes>Technology::Kubernetes
+--
+tech tree: [link to all linked technology tree]
+role: managing software on multiple servers
+owned by: Google
+type: open source
+summary: bla bla bla
+availability: open source
+
+pros: 
+	- good docs,
+	- easy to use
+	
+cons: 
+	- vendor locked in
+	- somewhat limiting
+	- have to use docker containers
+
+limitations:
+	- ...
+
+requirements:
+	- docker containers
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>664</x>
+      <y>1496</y>
+      <w>272</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Solution
+--
+automating deployment and maintaiment
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>640</x>
+      <y>1376</y>
+      <w>272</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Problem
+--
+maintaining sofware on multiple servers
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>128</x>
+      <y>936</y>
+      <w>184</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>Problem
+--
+summary
+branch -&gt; [software branch]
+class -&gt; [problem class]
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>160</x>
+      <y>1032</y>
+      <w>152</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Solution
+--
+summary
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>328</x>
+      <y>1024</y>
+      <w>152</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Solution
+--
+summary
+type: [tech/HR/etc]
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>184</x>
+      <y>1088</y>
+      <w>128</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Problem
+--
+summary
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>352</x>
+      <y>1088</y>
+      <w>128</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Problem
+--
+summary
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>384</x>
+      <y>1152</y>
+      <w>96</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Solution
+--
+summary
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>216</x>
+      <y>1152</y>
+      <w>96</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Solution
+--
+summary
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>416</x>
+      <y>1208</y>
+      <w>64</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Problem
+--
+summary
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>248</x>
+      <y>1208</y>
+      <w>64</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Problem
+--
+summary
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>544</x>
+      <y>960</y>
+      <w>272</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>Technology::Kubernetes
+--
+owned by: (text)
+summary: (text)
+availability: (open-source/proprietary/license)
+pros: (text)
+cons: (text)
+limitations: (text)
+ecosystem: &gt; Technology
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>344</x>
+      <y>648</y>
+      <w>224</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Problem
+--
+name
+summary: (text)
+parent: &gt; [solution/None] 
+class: &gt; [problem class]
+tags: [m2m &gt; Tag]
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>344</x>
+      <y>760</y>
+      <w>224</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Solution
+--
+problem: [Problem]
+summary: (text)
+type: [tech/HR/etc]
+technologies: [m2m &gt; Technology]
+tags: [m2m &gt; Tag]
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>720</x>
+      <y>280</y>
+      <w>248</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>TODO
+--
+- update Technologies
+- update Tags
+
+--
+serializers
+viewsets ?
+frontend
+
+
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>816</x>
+      <y>424</y>
+      <w>248</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>CRUD Problem
+--
+- filter
+
+- frontend
+--
+	- list
+	- update
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>816</x>
+      <y>592</y>
+      <w>248</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>CRUD Solution
+--
+- serializer
+- viewsets
+
+- frontend
+--
+	- create
+	- list
+	- update
+valign=top
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1336</x>
+      <y>968</y>
+      <w>152</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Problem
+
+
+caused by: {parent}
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1336</x>
+      <y>1048</y>
+      <w>152</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Solution
+
+tech
+n problems
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1496</x>
+      <y>1048</y>
+      <w>152</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Solution
+
+tech
+n problems
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1656</x>
+      <y>1048</y>
+      <w>152</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Solution
+
+tech
+n problems
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1576</x>
+      <y>880</y>
+      <w>200</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>problem detail page
+static - display only problem
+js app - show tree
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1576</x>
+      <y>952</y>
+      <w>200</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>click on solution and change to solution view
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1336</x>
+      <y>1184</y>
+      <w>152</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Solution
+
+problem
+tech
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1336</x>
+      <y>1264</y>
+      <w>152</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Problem
+
+
+n solutions
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1496</x>
+      <y>1264</y>
+      <w>152</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Problem
+
+
+n solutions
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1576</x>
+      <y>1176</y>
+      <w>200</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>solution detail page
+static - display only solution
+js app - show tree
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>1856</x>
+      <y>680</y>
+      <w>192</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>Load Problem/Solution page
+with static data on page</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>1856</x>
+      <y>720</y>
+      <w>192</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>set data into js vars
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>1856</x>
+      <y>760</y>
+      <w>192</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>ReactApp draws over detail
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>1856</x>
+      <y>800</y>
+      <w>192</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>load solutions and display</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>1856</x>
+      <y>840</y>
+      <w>192</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>can edit/report/etc</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1864</x>
+      <y>1272</y>
+      <w>200</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>select a problem and will display
+the solutions underneath
+
+maybe should limit vertical levels
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1864</x>
+      <y>1048</y>
+      <w>200</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>select a solution and will display
+the problems underneath
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1864</x>
+      <y>960</y>
+      <w>200</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>click to see problem parent and get redirected to solution page
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1864</x>
+      <y>1184</y>
+      <w>200</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>click to see solved problem and get redirected to problem page
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

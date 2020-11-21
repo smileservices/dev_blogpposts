@@ -209,7 +209,7 @@ set -as terminal-overrides ',*:indn@'
 curl {address}:{port}
 ```
 
-# Fylesystem
+# Filesystem
 
 ## Empty file without removing
 ```shell
@@ -238,6 +238,12 @@ verify
 ls -l file1 link1
 ```
 IMPORTANT: provide full path to file and links not relative to cwd
+
+## Mount/Unmount drives
+```
+fdisk -l
+sudo mount /dev/sdb1 /media/usb-drive/
+```
 
 # System check
 
