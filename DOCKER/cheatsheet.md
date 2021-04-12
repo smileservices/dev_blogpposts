@@ -2,7 +2,9 @@
 https://docker-curriculum.com/
 
 ## start docker
-
+```
+sudo snap start docker
+```
 
 ## images, containers
 - show all containers, images
@@ -18,7 +20,7 @@ docker build -t {image name} {path to Dockerfile}
 
 - run command for container
 ```bash
-
+docker exec -it {container name} {command}
 ```
 
 ## network

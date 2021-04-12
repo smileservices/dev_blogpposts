@@ -266,3 +266,12 @@ stop service
 ```shell
 sudo snap stop -disable {servicename}
 ```
+
+# find
+How to use `find` command: https://www.geeksforgeeks.org/find-command-in-linux-with-examples/
+
+General search for a file. example 
+
+```bash
+find {path} -name *.txt
+```

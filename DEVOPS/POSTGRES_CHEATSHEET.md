@@ -31,6 +31,9 @@ ALTER ROLE ubuild_t SET default_transaction_isolation TO 'read committed';
 ALTER ROLE ubuild_t SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE ubuild_db_t TO ubuild_t;
 
+## delete db
+`dropdb {dbname}` delete the database
+
 ## how to connect remotely to postgresql db on server with pycharm
 1. make postgresql accept remote connections
  - open /etc/postgresql/{version no}/main/postgresql.conf
@@ -43,6 +46,7 @@ GRANT ALL PRIVILEGES ON DATABASE ubuild_db_t TO ubuild_t;
 
 
  https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e
+
 
 ## USEFUL COMMANDS
 https://gist.github.com/Kartones/dd3ff5ec5ea238d4c546
@@ -129,3 +133,8 @@ psql -U postgres -c 'SHOW config_file'
 psql -h localhost -U {user}
 ```
 
+
+# PSQL commands:
+
+`\q` to quit
+`\d` display all tables in a database
