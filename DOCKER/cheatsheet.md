@@ -29,3 +29,6 @@ docker exec -it {container name} {command}
 docker network ls
 docker network inspect {network name}
 ```
+
+## running
+- detached (in background): add `-d` flag
