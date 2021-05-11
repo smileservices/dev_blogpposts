@@ -12,6 +12,7 @@ Setting up logging is crucial to monitoring any app. This way you know what work
 ### Django implementation of logging
 
 Django uses the pyhton logging module. Concepts to understand are `loggers`, `handlers`, `filters` and `formatters`:
+
 1. Loggers are messages containers
 2. Handlers are directing loggers to various output destinations like files, console, email, etc
 3. Filters can be used for both loggers and handlers
@@ -66,6 +67,7 @@ logger = logging.getLogger(__name__)
 
 ### Resources for reading
 These resources are great for understanding why and how to use logging in Django:
+
 1. [django logging the right way](https://lincolnloop.com/blog/django-logging-right-way/)
 2. [django and logging in plain english](https://djangodeconstructed.com/2018/12/18/django-and-python-logging-in-plain-english/)
 3. [django logging in production](https://mattsegal.dev/file-logging-django.html)
