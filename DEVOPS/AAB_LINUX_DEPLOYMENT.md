@@ -1,12 +1,18 @@
 Title: Deploying Django App
 Category: Django
-Tags: linux, django, unix, deployment
+Tags: linux, django, unix, deployment, ssl, certbot, postgresql, nginx
 Slug: deploying-django
 Summary: How to set up a Django app deployment on an Ubuntu server: initial configuration of the server and then setting up the app
 Date: 2018-06-03 10:20
 Modified: 2020-07-05 19:30
 
-## Workplan
+### Intro
+How to set up a Django app deployment on an Ubuntu server: initial configuration of the server and then setting up the app.
+
+### Workplan
+
+Deploying Django app is not an easy task. Need to take care of setting up the server, proxyserver, SSL certificate, database connections.
+
 1. Install nginx, python, virtualenv, certbot, postgresql etc
 2. Create user named as app
 3. Clone the app repo in the home folder of the user
@@ -16,19 +22,24 @@ Modified: 2020-07-05 19:30
 7. Create nginx config file
 8. Add gunicorn service to systemd or supervisor
 
-## Initial setup
-create user with sudo rights
+### Initial setup
+
+Create user with sudo rights
+
 ```shell
 adduser {name}
 paswd {name}
 usermod -aG sudo {name}
 su {name}
 ```
-- add publickey and set up ssh connection
-- remove password and root login
-- create user for each app
+Once we have the user set up, there are still a few steps to take care of:
 
-## Install python,django,virtualenv,nginx,gunicorn
+- Add publickey and set up ssh connection
+- Remove password and root login
+- Create user for each app
+
+### Install python,django,virtualenv,nginx,gunicorn
+
 ```shell
 sudo apt-get update
 sudo apt-get -y upgrade
@@ -43,27 +54,31 @@ sudo systemctl start supervisor
 sudo apt-get -y install python3-virtualenv
 sudo apt-get -y install python3-pip
 ```
-Install optional Redis, Elasticsearch
 
-## Set up django project
-- create new user for each app
-adduser {user}
-- create (virtual env)[https://docs.python.org/3/library/venv.html] in ~/www/{project_name}
+Some projects might require install an optional memory key-value database for caching like Redis
+
+### Set up django project
+
+Create new user for each app
+
+- Create linux user for app `adduser {username}`
+- Create [virtual env](https://docs.python.org/3/library/venv.html) in `~/www/{project_name}`
+
 ```shell
 python3 -m venv {project_name}
 ```
-- activate the venv 
+- Activate the venv 
 ```shell
 source ~/www/{project_name}
 ```
-- clone repo in ~/www/{project_name}/repo
-- install requirements
+- Alone repo in ~/www/{project_name}/repo
+- Install requirements
 ```shell
 pip install -r repo/requirements.txt
 ```
 
-- create .env file (if project requires it)
-- collectstatic and create superuser
+- Create .env file (if project requires it)
+- Collectstatic and create superuser
 
 ```shell
 python manage.py collectstatic
@@ -72,7 +87,7 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-## Set up postgresql
+### Set up PostgreSQL
 ```shell
 sudo apt-get -y install build-essential libpq-dev python-dev
 sudo apt-get -y install postgresql postgresql-contrib
@@ -83,8 +98,8 @@ psql -c "ALTER USER {db_username} WITH PASSWORD '{password}'"
 ```
 
 
-## Set up gunicorn
-create gunicorn_start file in {app root}/bin/
+### Set up Gunicorn (acting as proxyserver)
+Create gunicorn_start file in {app root}/bin/
 
 ```shell
 # gunicorn_start file
@@ -121,12 +136,13 @@ Make it executable
 ```shell
 chmod u+x bin/gunicorn_start
 ```
-- create empty directory 'run' where gunicorn.sock will be created
-- create directory 'logs' with empty file gunicorn-error.log
+- Create empty directory 'run' where gunicorn.sock will be created
+- Create directory 'logs' with empty file gunicorn-error.log
 
-### Add gunicorn to supervisor or systemd
+**Add gunicorn to supervisor or systemd**
+
 This step is required for making sure django app is run even if it stops
-- set up supervisor /etc/supervisor/conf.d/{name}.conf
+- Set up supervisor /etc/supervisor/conf.d/{name}.conf
 
 ```shell
 [program:{name}]
@@ -138,15 +154,15 @@ redirect_stderr=true
 stdout_logfile=/home/{user}/www/memeashirt/logs/gunicorn-error.log
 ```
 
-- add the new task to supervisor
+- Add the new task to supervisor
 
 ```shell
 sudo supervisorctl reread
 sudo supervisorctl update
 ```
 
-## Set up nginx
-- create vhost file in /etc/nginx/sites-available/{name}
+### Set up nginx
+Create vhost file in /etc/nginx/sites-available/{name}
 
 ```shell
 upstream app_memeashirt_test {                                                                    
@@ -196,7 +212,9 @@ sudo nginx -t
 sudo service nginx restart
 ```
 
-# Set up ssl
+### Set up ssl
+We'll create the SSL certificate ourselves, for free, using `certbot`
+
 ```shell
 sudo certbot --nginx -d {domain name} 
 ```
