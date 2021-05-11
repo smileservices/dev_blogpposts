@@ -18,6 +18,7 @@ This is an article meant to address this issue by providing clear instructions a
 
 
 ### Requirements
+When processing user uploaded images we have to take care of processing them: 
 1. Validate image
 2. Save Image to storage
 3. Create optimized thumbnails on saving an image
@@ -28,11 +29,13 @@ This is an article meant to address this issue by providing clear instructions a
 I think this is the best image handling library to work with Django as it has the most features and is widely used in big projects like Saleor.
 
 Pros: 
-- widely used
-- easy to set up
+
+- Widely used
+- Easy to set up
 
 Cons:
-- need to use the post_delete signal to clear the files and post_save to create the thumbnails:
+
+- Need to use the post_delete signal to clear the files and post_save to create the thumbnails:
 ```python
 # someapp/models.py
 from django.db import models
@@ -56,12 +59,12 @@ def delete_ExampleImageModel_images(sender, instance, **kwargs):
 
 ### Install
 
-- add with pip
+Add with pip
 ```bash
 pip install django-versatileimagefield
 ```
 
-- in settings.py
+In settings.py
 ```python
 INSTALLED_APPS = (
     # All your other apps here
@@ -69,7 +72,7 @@ INSTALLED_APPS = (
 )
 ```
 
-- use in models:
+Use in models:
 ```python
 from versatileimagefield.fields import PPOIField, VersatileImageField
 
@@ -79,17 +82,13 @@ class SomeModel(models.Model):
     )
 ```
 
-### Display in template:
-
-```html
-<img src="{{ result.image.image_file.thumbnail.350x350 }}">
-```
-
+Display in template `<img src="{{ result.image.image_file.thumbnail.350x350 }}">`
 
 ### Example model with image field from URL (for scraped content):
 How it works:
-- the model has an image_url field linking to an external image file
-- upon saving the model we get the image from the url and save it to the image_file field
+
+1. The model has an image_url field linking to an external image file
+2. Upon saving the model we get the image from the url and save it to the image_file field
 
 
 ```python
@@ -112,9 +111,9 @@ class StudyResourceImage(models.Model):
 ```
 
 ### Example implementation of VersatileImageField for production
-- delete all produced images sets with post_delete signal
-- create thumbs each time we save/update the image
-- use VERSATILEIMAGEFIELD_RENDITION_KEY_SETS for specifying how we create the thumbnails
+- Delete all produced images sets with post_delete signal
+- Create thumbs each time we save/update the image
+- Use VERSATILEIMAGEFIELD_RENDITION_KEY_SETS for specifying how we create the thumbnails
 
 
 ```python
@@ -132,7 +131,7 @@ MEDIA_ROOT = env('MEDIA_ROOT')
 MEDIA_URL = env('MEDIA_URL')
 ```
 
-inside the .env file:
+Inside the .env file:
 ```
 MEDIA_ROOT=/home/user/MEDIA
 MEDIA_URL=/media/
