@@ -6,26 +6,24 @@ Summary: How to handle images in production with django and nginx is not difficu
 Date: 2020-09-22 10:00
 Modified: 2020-09-22 19:30
 
-# Handling Models with images or galleries
-
 Everytime I have to implement adding images to a project I feel a "oh boy, here we go again" type of feeling. I've done it multiple times but each time I have to go through the process of searching through the django packages for something that can fulfill my requirements and then fiddling with storage/triggers for delete and templates. While the process is simple, the docs don't have fully working production grade examples. This is what this article is trying to do.
 
 This is an article meant to address this issue by providing clear instructions and working examples on how to set up a production ready image handling with django and versatileimagefield. We cover which library is best to use for handling images and how to use it for creating thumbnails and serve them. We also set up a production ready working example along with nginx configuration.
 
-## Libraries:
+### Libraries:
 - sorl-thumbnail.readthedocs.io
 - https://easy-thumbnails.readthedocs.io/
 - https://django-versatileimagefield.readthedocs.io/
 
 
-## Requirements
+### Requirements
 1. Validate image
 2. Save Image to storage
 3. Create optimized thumbnails on saving an image
 4. If delete parent model, have to delete the files also
 
 
-# Versatile Image Field
+### Versatile Image Field
 I think this is the best image handling library to work with Django as it has the most features and is widely used in big projects like Saleor.
 
 Pros: 
@@ -34,28 +32,28 @@ Pros:
 
 Cons:
 - need to use the post_delete signal to clear the files and post_save to create the thumbnails:
-    ```python
-    # someapp/models.py
-    from django.db import models
-    from django.dispatch import receiver
+```python
+# someapp/models.py
+from django.db import models
+from django.dispatch import receiver
 
-    from versatileimagefield.fields import VersatileImageField
+from versatileimagefield.fields import VersatileImageField
 
-    class ExampleImageModel(models.Model):
-        image = VersatileImageField(upload_to='images/')
+class ExampleImageModel(models.Model):
+    image = VersatileImageField(upload_to='images/')
 
-    @receiver(models.signals.post_delete, sender=ExampleImageModel)
-    def delete_ExampleImageModel_images(sender, instance, **kwargs):
-        """
-        Deletes ExampleImageModel image renditions on post_delete.
-        """
-        # Deletes Image Renditions
-        instance.image.delete_all_created_images()
-        # Deletes Original Image
-        instance.image.delete(save=False)
-    ```
+@receiver(models.signals.post_delete, sender=ExampleImageModel)
+def delete_ExampleImageModel_images(sender, instance, **kwargs):
+    """
+    Deletes ExampleImageModel image renditions on post_delete.
+    """
+    # Deletes Image Renditions
+    instance.image.delete_all_created_images()
+    # Deletes Original Image
+    instance.image.delete(save=False)
+```
 
-## Install
+### Install
 
 - add with pip
 ```bash
@@ -80,14 +78,14 @@ class SomeModel(models.Model):
     )
 ```
 
-## Display in template:
+### Display in template:
 
 ```html
 <img src="{{ result.image.image_file.thumbnail.350x350 }}">
 ```
 
 
-## Example model with image field from URL (for scraped content):
+### Example model with image field from URL (for scraped content):
 How it works:
 - the model has an image_url field linking to an external image file
 - upon saving the model we get the image from the url and save it to the image_file field
@@ -112,7 +110,7 @@ class StudyResourceImage(models.Model):
             super(StudyResourceImage, self).save(*args, **kwargs)
 ```
 
-## Example implementation of VersatileImageField for production
+### Example implementation of VersatileImageField for production
 - delete all produced images sets with post_delete signal
 - create thumbs each time we save/update the image
 - use VERSATILEIMAGEFIELD_RENDITION_KEY_SETS for specifying how we create the thumbnails
