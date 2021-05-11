@@ -6,11 +6,12 @@ Summary: How to handle images in production with django and nginx is not difficu
 Date: 2020-09-22 10:00
 Modified: 2020-09-22 19:30
 
+### Intro
 Everytime I have to implement adding images to a project I feel a "oh boy, here we go again" type of feeling. I've done it multiple times but each time I have to go through the process of searching through the django packages for something that can fulfill my requirements and then fiddling with storage/triggers for delete and templates. While the process is simple, the docs don't have fully working production grade examples. This is what this article is trying to do.
 
 This is an article meant to address this issue by providing clear instructions and working examples on how to set up a production ready image handling with django and versatileimagefield. We cover which library is best to use for handling images and how to use it for creating thumbnails and serve them. We also set up a production ready working example along with nginx configuration.
 
-### Libraries:
+### Libraries
 - sorl-thumbnail.readthedocs.io
 - https://easy-thumbnails.readthedocs.io/
 - https://django-versatileimagefield.readthedocs.io/
@@ -202,14 +203,14 @@ class ImageModelSerializer(serializers.ModelSerializer):
 
 ```
 
-```html
-<!-- this is how we access the images sets in template -->
-<img class="primary-image" src="{{ image_model_instance.sizes.medium }}" alt="">
-```
+This is how we access the images sets in template: 
+`<img class="primary-image" src="{{ image_model_instance.sizes.medium }}" alt="">`
 
 # Serving media files with NGINX
 
+To serve the static files in production we have to point to the absolute path of Media folder. 
 Inside the nginx configuration file /etc/nginx/sites-available/<filename>
+
 ```bash
     location /media/ {                                                                           
         alias /home/user/MEDIA/;                                
@@ -217,6 +218,7 @@ Inside the nginx configuration file /etc/nginx/sites-available/<filename>
 ```
 
 Next, test the config file and restart the services
+
 ```bash
 nginx -t
 systemctl restart nginx.service
