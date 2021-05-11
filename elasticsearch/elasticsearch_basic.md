@@ -73,4 +73,9 @@ https://logz.io/blog/elasticsearch-mapping/
 	- can have different analyzers for index or query
 
 
+## Create Index
+
+
+
+
 

@@ -275,3 +275,6 @@ General search for a file. example
 ```bash
 find {path} -name *.txt
 ```
+
+# restart
+immediately `sudo shutdown -r 0`
