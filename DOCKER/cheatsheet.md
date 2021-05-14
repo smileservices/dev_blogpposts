@@ -32,3 +32,11 @@ docker network inspect {network name}
 
 ## running
 - detached (in background): add `-d` flag
+
+### See running containers stats
+
+See all running docker containers resources
+`docker ps -q | xargs  docker stats --no-stream` or just `docker stats`
+
+### Limiting Docker Containers
+https://phoenixnap.com/kb/docker-memory-and-cpu-limit
