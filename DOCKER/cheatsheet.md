@@ -6,6 +6,13 @@ https://docker-curriculum.com/
 sudo snap start docker
 ```
 
+## stop/rm all docker containers
+`docker stop $(docker ps -a -q)`
+`docker rm $(docker ps -a -q)`
+
+## remove all containers filtered with grep
+`docker rm $(docker ps -a|grep ziti|awk '{print $1}')`
+
 ## images, containers
 - show all containers, images
 ```
@@ -40,3 +47,10 @@ See all running docker containers resources
 
 ### Limiting Docker Containers
 https://phoenixnap.com/kb/docker-memory-and-cpu-limit
+
+
+## TROUBLESHOOTING:
+
+!!Cannot connect to service (postgresql):
+
+Sometimes the services are available at address 172.21.0.2 rather than localhost or 127.0.0.1

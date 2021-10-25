@@ -91,3 +91,13 @@ Use to check how many entries the selected filter will ban
 **Checking jail status**
 
 `fail2ban-client status {jail name}`
+
+
+### Making sure Docker and `ufw` work well together
+
+Docker changes your iptables on its own, which doesn't play well with ufw status. 
+Possible solutions:
+
+1. Stop using the -p flag. Use docker linking or docker networks instead.
+2. Bind containers locally so they are not exposed outside your machine: 
+`docker run -p 127.0.0.1:8080:8080 ...`

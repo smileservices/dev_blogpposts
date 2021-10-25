@@ -53,7 +53,7 @@ https://gist.github.com/Kartones/dd3ff5ec5ea238d4c546
 
 1. First, open psql:
 '''
-sudo su - postres
+sudo su - postgres
 psql
 '''
 
@@ -138,3 +138,9 @@ psql -h localhost -U {user}
 
 `\q` to quit
 `\d` display all tables in a database
+`psql -f {sql file}` runs sql file
+
+# Apply sql dump
+`psql {dbname} < dump.sql` or `psql -U {user} {dbname} < dump.sql`
+
+https://kb.objectrocket.com/postgresql/how-to-run-an-sql-file-in-postgres-846

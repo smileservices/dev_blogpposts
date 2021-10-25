@@ -36,4 +36,4 @@ networks:
     driver: bridge
 ```
 
-Run 'docker-compose up' 
+Run `docker-compose up`

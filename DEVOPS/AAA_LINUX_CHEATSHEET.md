@@ -197,10 +197,10 @@ sudo ufw allow 22
 sudo ufw allow from 15.15.15.51
 ```
 ### Investigate ports
-see all ports
-```shell
-sudo netstat -tulpn
-```
+Read all about ports (here)[https://www.journaldev.com/34113/opening-a-port-on-linux]
+
+See all opened ports with `sudo netstat -tulpn`
+Check for existing sockets with `ss -lntu`
 
 ### tmux
 A terminal multiplexer (simulates multiple terminals inside one)
@@ -285,6 +285,56 @@ sudo snap stop -disable {servicename}
 A good guide on how to use `find` command is [here](https://www.geeksforgeeks.org/find-command-in-linux-with-examples/) \
 General search for a file. example `find {path} -name *.txt`
 
+### Through a file
+`grep {text} file`
+
 
 ### Handle machine state
 Restart immediately using `sudo shutdown -r 0`
+
+### Passing Commands
+Passing input by stdin `ls | wc -l`
+This will count the lines in the output of ls
+
+Passing input by command line arguments `wc -l $(ls)`
+This will count lines in the list of files printed by ls
+
+### Managing Space
+If you're using ubuntu snaps packages and docker chances are your packages and downloaded images/volumes will clutter up the disk space. Periodically is good to do a "spring cleaning" to avoid situations where you get prompted "you ran out of space!".
+
+Follow these steps for the "spring cleaning":
+1. Check available space
+- we are using `df` and `du`
+`df -h` 				- show a summary of all mounted filesystems
+`du -h --max-depth=1 \` - show the calculated used space of the root directory 
+
+2. Clear up the usual (temp files, trash, logs, old packages..)
+Use the utility `bleachbit` to clean up unimportant files
+
+3. Clear up Docker
+`docker system df` 		- show a disk usage summary
+`docker system prune`	- clear any unused containers, images or volumes (!make sure you run the containers you want to keep)
+
+4. Clear up Snap
+`snap remove {packagename}`
+
+### Archiving/Zipping .tar .zip
+
+`tar -xf archive.tar`
+
+`tar -xf archive.tar -C /path/to/destination`
+
+*securing a folder with password encryption*
+We are not using zip because its encryption is not strong enough. Instead we are using (7zip)[https://7ziphelp.com/7zip-command-line]
+
+
+Add
+`7z a -p -mhe=on archiveName.7z /path/to/directory`
+
+Extract
+`7z x test.7z`
+
+
+### Clear DNS cache
+
+This is requied after updating `/etc/hosts` file: `sudo systemd-resolve --flush-caches`

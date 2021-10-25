@@ -42,3 +42,10 @@ class BigTest(APITestCase):
         self.assertEqual(2, 2)
 
 ```
+
+
+# Testing with Celery
+
+`from django.test import override_settings`
+
+Add this decorator over the test method: `@override_settings(CELERY_ALWAYS_EAGER=True, BROKER_BACKEND='memory')`
