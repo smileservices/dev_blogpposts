@@ -5,6 +5,7 @@ urlpatterns = [
     path('blog/<int:year>/', views.year_archive, {'foo': 'bar'}),
 ]
 ```
+resulting url will be available at `/blog/2022`
 
 # Using reverse:
 

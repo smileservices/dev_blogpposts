@@ -320,6 +320,11 @@ Use the utility `bleachbit` to clean up unimportant files
 
 ### Archiving/Zipping .tar .zip
 
+
+make zip archive: `zip -r {dest_file} {folder_path}`
+
+`tar --create --file=archive.tar file1 file2 file3`
+
 `tar -xf archive.tar`
 
 `tar -xf archive.tar -C /path/to/destination`
@@ -338,3 +343,15 @@ Extract
 ### Clear DNS cache
 
 This is requied after updating `/etc/hosts` file: `sudo systemd-resolve --flush-caches`
+
+
+# time date datetime
+
+`sudo dpkg-reconfigure tzdata`
+
+## scp command
+
+Used to copy files from remote hosts
+
+For example to copy a file named file.txt from a remote server with IP 10.10.0.2 run the following command:
+`scp -P {port} {remote_username}@{remote ip}:/remote/file.txt /local/directory`

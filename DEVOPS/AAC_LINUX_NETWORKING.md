@@ -41,7 +41,7 @@ A software construct used to handle one end of a network data connection. It has
     - shows all opened files
     - all internet and network files `lsof -i`
     - `lsof -p {PID}`
-    - which program is using a port `lsof -i :80`; port range `lsof -i :1-1024`
+    - which program is using a port `lsof -i :80`; port range `lsonf -i :1-1024`
     - 
 
 *Network Status*
@@ -63,3 +63,9 @@ A software construct used to handle one end of a network data connection. It has
     - can listen for a TCP/IP connection using netcat `netcat -l {port}`
 *Redirect*
 
+### Something wrong
+
+This [ifconfig guide](https://www.computerhope.com/unix/uifconfi.htm)
+
+- `ifconfig` to see all network adapters
+- restart each one to see if it fixes the issue
