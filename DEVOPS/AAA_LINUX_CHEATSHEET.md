@@ -179,6 +179,12 @@ Tell the sshd service to reload its configuration:
 service ssh reload
 ```
 
+#### SSH Agent
+`eval $(ssh-agent)` will start the ssh-agent
+- show all identities `ssh-add -l`
+- add identity `ssh-add <path>`
+- remove identity `ssh-add -D <ssh key path>`
+
 ### Investigate Processes
 
 To show processes and their owners use `ps -ef | grep nginx`
@@ -245,16 +251,22 @@ Verify the created symlink with `ls -l file1 link1`
 
 ### Mount/Unmount drives
 
+
+
 ```
-fdisk -l
+sudo fdisk -l | sed -e '/Disk \/dev\/loop/,+5d'
 sudo mount /dev/sdb1 /media/usb-drive/
+sudo umount /dev/sdb1
 ```
 
 ### System check
 
 **Disk space**
 
+Show all partitions and their size `lsblk -e7` while excluding snap volumes
 Executing `df -h` will show space information in human readable format
+
+Use `ncdu`
 
 **Available memory**
 
@@ -325,9 +337,13 @@ make zip archive: `zip -r {dest_file} {folder_path}`
 
 `tar --create --file=archive.tar file1 file2 file3`
 
+extract tar archive:
+
 `tar -xf archive.tar`
 
 `tar -xf archive.tar -C /path/to/destination`
+
+extract .xz archive `unxz {name}`
 
 *securing a folder with password encryption*
 We are not using zip because its encryption is not strong enough. Instead we are using (7zip)[https://7ziphelp.com/7zip-command-line]
@@ -355,3 +371,18 @@ Used to copy files from remote hosts
 
 For example to copy a file named file.txt from a remote server with IP 10.10.0.2 run the following command:
 `scp -P {port} {remote_username}@{remote ip}:/remote/file.txt /local/directory`
+
+
+# Logging
+
+All kinds of logs - `dmesg`
+
+
+# i3wm
+
+i3-msg to send messages to i3wm: `https://www.mankier.com/1/i3-msg`
+`i3-msg -t command {}`
+
+i3-wm interface: `https://i3wm.org/docs/ipc.html#_command_reply`
+
+start i3-status

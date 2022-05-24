@@ -34,4 +34,15 @@ Revert merge commit `git revert -m 1 {merge commit hash}`
 
 stash with name `git stash push -m {stashname}`
 
+# Reset local branch to origin
 
+```
+git checkout {branchname}
+git reset --hard @{u}
+git clean -df
+git pull
+```
+
+# Rebase
+
+`git rebase {branchname}`

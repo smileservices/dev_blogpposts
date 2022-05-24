@@ -68,4 +68,9 @@ A software construct used to handle one end of a network data connection. It has
 This [ifconfig guide](https://www.computerhope.com/unix/uifconfi.htm)
 
 - `ifconfig` to see all network adapters
-- restart each one to see if it fixes the issue
+- restart each one to see if it fixes the issue `sudo ifconfig {adapter} down` / `sudo ifconfig {adapter} up`
+
+### Using nmcli to manage connections:
+
+command to list active connection with a header: `nmcli -p connection show --active`
+command to deactivate/activate connection: `nmcli connection {down/up} {uuid}`
