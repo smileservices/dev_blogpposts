@@ -7,8 +7,7 @@ sudo snap start docker
 ```
 
 ## stop/rm all docker containers
-`docker stop $(docker ps -a -q)`
-`docker rm $(docker ps -a -q)`
+`docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)`
 
 ## remove all containers filtered with grep
 `docker rm $(docker ps -a|grep ziti|awk '{print $1}')`

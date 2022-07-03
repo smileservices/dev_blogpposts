@@ -46,3 +46,8 @@ git pull
 # Rebase
 
 `git rebase {branchname}`
+
+# cherrypick
+learn!!!
+
+
