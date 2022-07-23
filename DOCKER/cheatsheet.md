@@ -53,3 +53,11 @@ https://phoenixnap.com/kb/docker-memory-and-cpu-limit
 !!Cannot connect to service (postgresql):
 
 Sometimes the services are available at address 172.21.0.2 rather than localhost or 127.0.0.1
+
+## Networking
+
+Docker containers communicating to eachother: 
+1. inside the docker-compose - use their assigned service name or IP (inspect docker network and check out the ip of all the containers)
+2. outside the docker-compose - expose ports like '5432:5432' access it like localhost:5432
+
+https://maximorlov.com/4-reasons-why-your-docker-containers-cant-talk-to-each-other/
