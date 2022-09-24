@@ -189,6 +189,8 @@ service ssh reload
 
 To show processes and their owners use `ps -ef | grep nginx`
 
+To kill / stop a process use `kill -15 {pid}`
+
 ### Ufw (firewall)
 ```shell
 sudo ufw status verbose
@@ -251,13 +253,14 @@ Verify the created symlink with `ls -l file1 link1`
 
 ### Mount/Unmount drives
 
-
-
 ```
 sudo fdisk -l | sed -e '/Disk \/dev\/loop/,+5d'
 sudo mount /dev/sdb1 /media/usb-drive/
 sudo umount /dev/sdb1
 ```
+
+To format a drive: `sudo mkfs.ntfs /dev/sdb1`
+Make sure it's unmounted
 
 ### System check
 
@@ -319,6 +322,8 @@ Follow these steps for the "spring cleaning":
 - we are using `df` and `du`
 `df -h` 				- show a summary of all mounted filesystems
 `du -h --max-depth=1 \` - show the calculated used space of the root directory 
+
+`sudo du -h --max-depth=1 /usr/lib | sort -h`
 
 2. Clear up the usual (temp files, trash, logs, old packages..)
 Use the utility `bleachbit` to clean up unimportant files
@@ -386,3 +391,23 @@ i3-msg to send messages to i3wm: `https://www.mankier.com/1/i3-msg`
 i3-wm interface: `https://i3wm.org/docs/ipc.html#_command_reply`
 
 start i3-status
+
+# Run at startup
+
+If you want it to be global, modify
+
+ /etc/profile 
+or add a script to
+
+ /etc/profile.d
+If you want it to be user-specific, modify
+
+ ~/.profile
+
+
+# Git get commits diff
+
+```bash
+git fetch
+git log v10.1.0..origin/master --oneline | sed 's/^\S*\s//' | grep -v '^Merge pull request'
+```

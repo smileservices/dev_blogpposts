@@ -1,6 +1,10 @@
 # Docker Cheatsheet
 https://docker-curriculum.com/
 
+# Setting up
+
+Change default storage space: https://evodify.com/change-docker-storage-location/
+
 ## start docker
 ```
 sudo snap start docker
@@ -61,3 +65,17 @@ Docker containers communicating to eachother:
 2. outside the docker-compose - expose ports like '5432:5432' access it like localhost:5432
 
 https://maximorlov.com/4-reasons-why-your-docker-containers-cant-talk-to-each-other/
+
+# Working with Repositories
+
+Can push/pull images to/from custom repositories.
+
+You need to tag your image correctly first with your registryhost:
+`docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]`
+
+Then docker push using that same tag. `docker push NAME[:TAG]`
+
+```bash
+docker tag 518a41981a6a myRegistry.com/myImage
+docker push myRegistry.com/myImage
+```
