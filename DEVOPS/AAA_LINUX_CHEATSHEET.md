@@ -415,3 +415,16 @@ If you want it to be user-specific, modify
 git fetch
 git log v10.1.0..origin/master --oneline | sed 's/^\S*\s//' | grep -v '^Merge pull request'
 ```
+
+
+# Bluetooth
+Use cli to connect to bluetooth
+
+```bash
+bluetoothctl
+devices
+scan on
+pair 34:88:5D:51:5A:95 (34:88:5D:51:5A:95 is my device code,replace it with yours)
+trust 34:88:5D:51:5A:95
+connect 34:88:5D:51:5A:95
+```
