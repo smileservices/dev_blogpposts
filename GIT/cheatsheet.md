@@ -43,6 +43,10 @@ git clean -df
 git pull
 ```
 
+# Tags
+
+To delete remote tag: `git push origin :refs/tags/tagname`
+
 # Rebase
 
 `git rebase {branchname}`

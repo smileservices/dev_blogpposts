@@ -191,6 +191,9 @@ To show processes and their owners use `ps -ef | grep nginx`
 
 To kill / stop a process use `kill -15 {pid}`
 
+To automatically kill with grep:
+`kill -9 $(ps aux | grep '[p]ython csp_build.py' | awk '{print $2}')`
+
 ### Ufw (firewall)
 ```shell
 sudo ufw status verbose
@@ -380,7 +383,8 @@ For example to copy a file named file.txt from a remote server with IP 10.10.0.2
 
 # Logging
 
-All kinds of logs - `dmesg`
+All kinds of logs `dmesg`
+See current logs `journalctl`
 
 
 # i3wm

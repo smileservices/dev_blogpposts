@@ -10,6 +10,9 @@ Change default storage space: https://evodify.com/change-docker-storage-location
 sudo snap start docker
 ```
 
+## run image into container with bash
+`docker run --rm -it --entrypoint bash <image name>`
+
 ## stop/rm all docker containers
 `docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)`
 
