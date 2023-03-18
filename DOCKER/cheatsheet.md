@@ -82,3 +82,5 @@ Then docker push using that same tag. `docker push NAME[:TAG]`
 docker tag 518a41981a6a myRegistry.com/myImage
 docker push myRegistry.com/myImage
 ```
+
+infra@aliz.ai

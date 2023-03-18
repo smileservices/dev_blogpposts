@@ -56,12 +56,31 @@ A software construct used to handle one end of a network data connection. It has
 
 ### Port Management
 
+Read all about ports (here)[https://www.journaldev.com/34113/opening-a-port-on-linux]
+
 *Close*
     - just use `ufw` but sometimes it's bad
     - seems to have a problem with docker
 *Open*
     - can listen for a TCP/IP connection using netcat `netcat -l {port}`
 *Redirect*
+
+See all opened ports with `sudo netstat -tulpn`
+Check for existing sockets with `ss -lntu`
+
+### Ufw (firewall)
+```shell
+sudo ufw status verbose
+sudo ufw enable
+sudo ufw allow http
+sudo ufw allow https
+...
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow 22
+sudo ufw allow from 15.15.15.51
+```
 
 ### Something wrong
 
