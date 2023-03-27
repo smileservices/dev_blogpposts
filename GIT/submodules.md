@@ -1,5 +1,11 @@
 # Git Submodules
 
+## Pulling submodules inside a cloned repo
+
+```
+git submodule init && git submodule update
+```
+
 https://www.w3docs.com/snippets/git/how-to-pull-the-latest-git-submodule.html
 
 To pull latest versions of all submodules
