@@ -1,5 +1,11 @@
 # Git Submodules
 
+
+## Add submodule
+```
+git submodule add <url>
+```
+
 ## Pulling submodules inside a cloned repo
 
 ```

@@ -16,6 +16,9 @@ sudo snap start docker
 ## stop/rm all docker containers
 `docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)`
 
+## 1remove all networks:
+`docker network rm $(docker network ls -q)`
+
 ## remove all containers filtered with grep
 `docker rm $(docker ps -a|grep ziti|awk '{print $1}')`
 
@@ -42,6 +45,8 @@ docker exec -it {container name} {command}
 docker network ls
 docker network inspect {network name}
 ```
+
+- to run on the same host network, add `network_mode: host` to the specific service. the serivce using this cannot map ports.
 
 ## running
 - detached (in background): add `-d` flag

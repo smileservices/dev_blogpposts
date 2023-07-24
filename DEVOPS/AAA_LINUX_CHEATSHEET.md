@@ -380,6 +380,8 @@ Used to copy files from remote hosts
 For example to copy a file named file.txt from a remote server with IP 10.10.0.2 run the following command:
 `scp -P {port} {remote_username}@{remote ip}:/remote/file.txt /local/directory`
 
+To copy a file from local to a remote place:
+`scp /path/to/local/file username@remote_ip:/path/to/remote/directory`
 
 # Logging
 
@@ -432,3 +434,9 @@ connect 34:88:5D:51:5A:95
 # lsof (list open files)
 
 https://www.howtogeek.com/426031/how-to-use-the-linux-lsof-command/
+
+
+
+# Google drive:
+label is in `~/.gdfuse/`
+mount with label: `google-drive-ocamlfuse -label vldmr ~/Documents/gdrive`
